@@ -1,17 +1,51 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- <props name="Gopi" anotherName="Govardhan"   :likes=45 :isPublished="true" :fistname="name" 
+  :secondName="channel" />
+  -->
+
+  <div>
+    <!-- <button @click="showPopup= true">Show Popup</button>
+  <popup v-show="showPopup" @close="closepopup" @message="msg" /> -->
+    <!-- <comp-a /> -->
+    <!-- App components userName :{{userName}} -->
+    <slotParent />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import slotParent from "./components/DataSharing/SlotsParent.vue";
 
 export default {
-  name: 'App',
+  name: "App",
+  data() {
+    return {
+      message: "",
+      showPopup: false,
+      userName: "Govardhan Reddy",
+      name: "nandu",
+      channel: "YT",
+    };
+  },
+  methods: {
+    closepopup(name) {
+      this.showPopup = false;
+      console.log(name);
+    },
+    msg(message) {
+      console.log(message);
+      this.message = message;
+    },
+  },
+
+  provide() {
+    return {
+      userName: this.userName,
+    };
+  },
   components: {
-    HelloWorld
-  }
-}
+    slotParent,
+  },
+};
 </script>
 
 <style>
